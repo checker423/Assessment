@@ -168,6 +168,36 @@ body {
     border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.playlist-switcher {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.playlist-tab {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #b3b3b3;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.3s;
+}
+
+.playlist-tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.playlist-tab.active {
+    background: rgba(29, 185, 84, 0.2);
+    border-color: #1db954;
+    color: #1db954;
+    font-weight: 600;
+}
+
 .playlist-header {
     display: flex;
     flex-direction: column;

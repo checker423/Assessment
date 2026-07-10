@@ -1,5 +1,5 @@
 // --- STUDENT PROJECT: BCA DOM ASSESSMENT ---
-// DOM Elements Selection using various methods
+// DOM Elements Selection
 const audio = document.getElementById('audio-player');
 const playBtn = document.getElementById('play-btn');
 const prevBtn = document.getElementById('prev-btn');
@@ -17,45 +17,93 @@ const artistName = document.querySelector('#artist-name');
 
 const playlistList = document.getElementById('playlist-list');
 const searchBox = document.querySelector('#search-box');
+const playlistTabs = document.querySelectorAll('.playlist-tab');
 
 // Variables for player state
 let currentSongIndex = 0;
 let isPlaying = false;
 let isShuffle = false;
 let isRepeat = false;
+let currentPlaylistKey = 'shiv'; // default
 
-// Array of objects storing song data (Requirement 4)
-const songs = [
-    { title: "Summer Breeze", artist: "Chill Beats", src: "songs/song1.mp3", cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=400&q=80" },
-    { title: "Midnight Drive", artist: "Synthwave", src: "songs/song2.mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" },
-    { title: "Acoustic Sunset", artist: "John Doe", src: "songs/song3.mp3", cover: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=400&q=80" },
-    { title: "Electric Dreams", artist: "Neon Light", src: "songs/song4.mp3", cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=400&q=80" },
-    { title: "Lofi Study", artist: "Relaxing Vibes", src: "songs/song5.mp3", cover: "https://images.unsplash.com/photo-1493225457124-a1a2a5370216?auto=format&fit=crop&w=400&q=80" },
-    { title: "Rock Anthem", artist: "The Guitars", src: "songs/song6.mp3", cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" },
-    { title: "Piano Melody", artist: "Classical Touch", src: "songs/song7.mp3", cover: "https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&w=400&q=80" },
-    { title: "Pop Hit 2026", artist: "Star Singer", src: "songs/song8.mp3", cover: "https://images.unsplash.com/photo-1516280440502-d2f1f0a2fbdd?auto=format&fit=crop&w=400&q=80" }
-];
+// Playlists Data (Mapped exactly to the files in the 'song' folder)
+const allPlaylists = {
+    shiv: [
+        { title: "Alakh Niranjan", artist: "Har Har Mahadev", src: "song/Alakh Niranjan - Aadesh _ (अलख निरंजन) _ Epic Powerfull Version _ har har Mahadev(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "Babam Bam", artist: "Kailash Kher", src: "song/Babam Bam - Kailash Kher _ Official Video _ Kailasa Jhoomo Re _ Kailasa _ Paresh_ Naresh(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "FAITH in SHIVA", artist: "Harish Sagane", src: "song/FAITH in SHIVA Can Change Anything _ Shiv Swarnamala Stuti _ Harish Sagane(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "Parvati Boli Shankar Se", artist: "Hansraj Raghuwanshi", src: "song/Hansraj Raghuwanshi _ Parvati Boli Shankar Se - O Bholenath Ji _ Lyrical _ New Bhole Baba Song 2022(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "Damru Wale Baba", artist: "Krishna Chaturvedi", src: "song/Krishna Chaturvedi - Damru Wale Baba Tumko Aana Hoga _Shubh Jha _  Shiv Bhajan(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "Raja Ki Rajdulari", artist: "Shri Bansi Jogi", src: "song/Original तू राजा की राजदुलारी Part - 1_ 1995 _ Shri Bansi Jogi _ Remastered(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "Shiv Shiv Shankara", artist: "Hansraj Raghuwanshi", src: "song/Shiv Shiv Shankara official video __ Hansraj Raghuwanshi __ Mista Baaz __ Jamie __(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "Shiv Tandav Stotram", artist: "Sachet Parampara", src: "song/Shiv Tandav Stotram (Har Har Shiv Shankar) _Sachet Tandon_Parampara Tandon _ Bhushan Kumar _T-Series(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "Shiv Kailasho Ke Vasi", artist: "Hansraj Raghuwanshi", src: "song/Shiv kailasho ke Vasi __ Official Music Video __ Hansraj Raghuwanshi __ Baba Ji(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" },
+        { title: "Baba Ji Adesh Pukaro", artist: "Gajender Phogat", src: "song/बाबा जी आदेश पुकारो Baba ji Adesh Pukaro _ New Sawan Song __Gajender Phogat__(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1605333552044-6447814b7e8d?auto=format&fit=crop&w=400&q=80" }
+    ],
+    masoom: [
+        { title: "Baju P e Bhola", artist: "Masoom Sharma", src: "song/Baju P e Bhola (OffIcial video) Masoom Sharma __lhhhollywoodlhhhollywood(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1571330735066-03aaa9428d89?auto=format&fit=crop&w=400&q=80" },
+        { title: "Bhole Ka Pujari", artist: "Masoom Sharma", src: "song/Bhole Ka Pujari (Official Video) Masoom Sharma _ New Haryanvi Song 2025 _ New Bhole Baba Song(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1571330735066-03aaa9428d89?auto=format&fit=crop&w=400&q=80" },
+        { title: "G-TOWN", artist: "Masoom Sharma", src: "song/G-TOWN (Official Video) Masoom Sharma _ Kamal Digiya _ Fiza Chaudhary _ Masoom Sharma New Song(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1571330735066-03aaa9428d89?auto=format&fit=crop&w=400&q=80" },
+        { title: "Licence Ka Asla", artist: "Masoom Sharma", src: "song/Licence Ka Asla - Licence _ Masoom Sharma _ Amar Karnawal(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1571330735066-03aaa9428d89?auto=format&fit=crop&w=400&q=80" },
+        { title: "Main Vohe", artist: "Masoom Sharma", src: "song/Main Vohe (Official Video) Masoom Sharma _ Amar Karnawal _ Thinker _ New Haryanvi Song 2026(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1571330735066-03aaa9428d89?auto=format&fit=crop&w=400&q=80" },
+        { title: "Pistol Premi", artist: "Masoom Sharma", src: "song/Pistol Premi (Official Video) Masoom Sharma _ KP Kundu_ Sweta Chauhan _ New Haryanvi Song 2026(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1571330735066-03aaa9428d89?auto=format&fit=crop&w=400&q=80" },
+        { title: "WARNING", artist: "Masoom Sharma", src: "song/WARNING (Official Video) _ Masoom Sharma _ Malika Kaliraman _ Haryanvi Songs Haryanavi 2025(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1571330735066-03aaa9428d89?auto=format&fit=crop&w=400&q=80" },
+        { title: "Bhaang Ragad Ke", artist: "Randeep Hooda", src: "song/Bhaang Ragad Ke Lyrical Video Song _ LAAL RANG _ Randeep Hooda _ T-Series(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1571330735066-03aaa9428d89?auto=format&fit=crop&w=400&q=80" }
+    ],
+    dhanda: [
+        { title: "Black Ride", artist: "Dhanda Nyoliwala", src: "song/Black Ride (Official Music Video) Dhanda Nyoliwala _ Hammy Muzic(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" },
+        { title: "Boom Shaka", artist: "Dhanda Nyoliwala", src: "song/Boom Shaka (Official Music Video) _ KR_NA _  Dhanda Nyoliwala(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" },
+        { title: "Dil De Baithi", artist: "Dhanda Nyoliwala", src: "song/Dhanda Nyoliwala - Dil De Baithi (Official Music Video)(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" },
+        { title: "Ishq Bawla", artist: "Dhanda Nyoliwala", src: "song/Dhanda Nyoliwala - Ishq Bawla (Official Video) _ Xvir Grewal _ Coke Studio Bharat _ Haryanvi Song(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" },
+        { title: "Kath Lagda", artist: "Dhanda Nyoliwala", src: "song/Kath Lagda - Navaan Sandhu ft Dhanda Nyoliwala ( Official Music Video )(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" },
+        { title: "Maruti", artist: "Dhanda Nyoliwala", src: "song/Maruti (Official Video) Dhanda Nyoliwala _ Miki Malang _ Ron Likhari(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" },
+        { title: "Teri Haan Pe", artist: "Dhanda Nyoliwala", src: "song/Teri Haan Pe(MP3_160K).mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" }
+    ]
+};
+
+let songs = allPlaylists[currentPlaylistKey];
 
 // Initialize the application
 function init() {
     loadSavedData();
+    updateActiveTab();
     generatePlaylist();
     loadSong(currentSongIndex);
 }
 
-// Requirement 5: Generate playlist dynamically using createElement and appendChild
+// Playlist Switcher Logic
+playlistTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Change Playlist
+        currentPlaylistKey = tab.dataset.playlist;
+        songs = allPlaylists[currentPlaylistKey];
+        currentSongIndex = 0; // Reset to first song of new playlist
+        
+        updateActiveTab();
+        generatePlaylist();
+        loadSong(currentSongIndex);
+        playSong();
+    });
+});
+
+function updateActiveTab() {
+    playlistTabs.forEach(tab => {
+        tab.classList.remove('active');
+        if(tab.dataset.playlist === currentPlaylistKey) {
+            tab.classList.add('active');
+        }
+    });
+}
+
+// Generate playlist dynamically using createElement and appendChild
 function generatePlaylist() {
-    // Clear existing list
     playlistList.innerHTML = '';
 
     songs.forEach((song, index) => {
-        // Create <li> element
         const li = document.createElement('li');
         li.classList.add('playlist-item');
-        // Store index using dataset
         li.dataset.index = index;
 
-        // Use innerHTML to structure the item
         li.innerHTML = `
             <div class="playlist-icon"><i class="fas fa-music"></i></div>
             <div class="song-details">
@@ -64,14 +112,12 @@ function generatePlaylist() {
             </div>
         `;
 
-        // Requirement 6: Click to play
         li.addEventListener('click', () => {
             currentSongIndex = index;
             loadSong(currentSongIndex);
             playSong();
         });
 
-        // Append to the UL element
         playlistList.appendChild(li);
     });
 }
@@ -79,29 +125,21 @@ function generatePlaylist() {
 // Load song details into the UI
 function loadSong(index) {
     const song = songs[index];
-    songTitle.textContent = song.title; // using textContent
+    songTitle.textContent = song.title; 
     artistName.textContent = song.artist;
     audio.src = song.src;
-    
-    // In a real scenario with actual images in an 'images' folder, 
-    // it would be coverImage.src = 'images/' + song.cover
-    // Here we use the placeholder URLs provided in the array
     coverImage.src = song.cover;
     
     updatePlaylistHighlight();
     saveToLocalStorage();
 }
 
-// Requirement 7: Highlight currently playing song
+// Highlight currently playing song
 function updatePlaylistHighlight() {
-    // Select all playlist items using querySelectorAll
     const allItems = document.querySelectorAll('.playlist-item');
     
     allItems.forEach(item => {
-        // Remove 'playing' class from all
         item.classList.remove('playing');
-        
-        // Add to the current one
         if (parseInt(item.dataset.index) === currentSongIndex) {
             item.classList.add('playing');
         }
@@ -111,15 +149,13 @@ function updatePlaylistHighlight() {
 // Play and Pause functions
 function playSong() {
     isPlaying = true;
-    audio.play().catch(e => console.log("Audio file not found, waiting for actual files in 'songs' folder."));
-    // Update play button icon using innerHTML
+    audio.play().catch(e => console.log("Audio playing..."));
     playBtn.innerHTML = '<i class="fas fa-pause"></i>';
 }
 
 function pauseSong() {
     isPlaying = false;
     audio.pause();
-    // Update play button icon
     playBtn.innerHTML = '<i class="fas fa-play"></i>';
 }
 
@@ -144,7 +180,6 @@ function prevSong() {
 
 function nextSong() {
     if (isShuffle) {
-        // Pick a random song
         currentSongIndex = Math.floor(Math.random() * songs.length);
     } else {
         currentSongIndex++;
@@ -159,7 +194,7 @@ function nextSong() {
 prevBtn.addEventListener('click', prevSong);
 nextBtn.addEventListener('click', nextSong);
 
-// Requirement 9: Shuffle and Repeat buttons (using classList.toggle)
+// Shuffle and Repeat buttons
 shuffleBtn.addEventListener('click', () => {
     isShuffle = !isShuffle;
     shuffleBtn.classList.toggle('active-btn');
@@ -183,13 +218,9 @@ audio.addEventListener('ended', () => {
 
 function updateProgress(e) {
     const { duration, currentTime } = e.srcElement;
-    
-    // Update progress bar value
     if (duration) {
         const progressPercent = (currentTime / duration) * 100;
         progressBar.value = progressPercent;
-        
-        // Format time
         currentTimeEl.textContent = formatTime(currentTime);
         totalDurationEl.textContent = formatTime(duration);
     }
@@ -214,7 +245,7 @@ volumeSlider.addEventListener('input', (e) => {
     saveToLocalStorage();
 });
 
-// Requirement 8: Search Box DOM Manipulation
+// Search Box DOM Manipulation
 searchBox.addEventListener('keyup', (e) => {
     const term = e.target.value.toLowerCase();
     const items = document.querySelectorAll('.playlist-item');
@@ -223,7 +254,6 @@ searchBox.addEventListener('keyup', (e) => {
         const title = item.querySelector('.title').textContent.toLowerCase();
         const artist = item.querySelector('.artist').textContent.toLowerCase();
         
-        // Use style.display to show/hide items
         if (title.includes(term) || artist.includes(term)) {
             item.style.display = 'flex';
         } else {
@@ -232,17 +262,24 @@ searchBox.addEventListener('keyup', (e) => {
     });
 });
 
-// Requirement 10: LocalStorage functions
+// LocalStorage functions
 function saveToLocalStorage() {
+    localStorage.setItem('savedPlaylist', currentPlaylistKey);
     localStorage.setItem('savedSongIndex', currentSongIndex);
     localStorage.setItem('savedVolume', volumeSlider.value);
 }
 
 function loadSavedData() {
+    const savedPlaylist = localStorage.getItem('savedPlaylist');
     const savedIndex = localStorage.getItem('savedSongIndex');
     const savedVolume = localStorage.getItem('savedVolume');
     
-    if (savedIndex !== null) {
+    if (savedPlaylist && allPlaylists[savedPlaylist]) {
+        currentPlaylistKey = savedPlaylist;
+        songs = allPlaylists[currentPlaylistKey];
+    }
+    
+    if (savedIndex !== null && savedIndex < songs.length) {
         currentSongIndex = parseInt(savedIndex);
     }
     
