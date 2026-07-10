@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luigi's Pizza Artistry | Culinary Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-main: #f8f8f2;
+            --accent: #ff4757;
+            --accent-glow: rgba(255, 71, 87, 0.4);
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        /* Abstract Background */
+        .bg-shapes {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            filter: blur(80px);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 20s infinite alternate;
+        }
+
+        .shape-1 { top: -10%; left: -10%; width: 400px; height: 400px; background: #ff4757; }
+        .shape-2 { bottom: -10%; right: -10%; width: 500px; height: 500px; background: #ffa502; }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(100px, 50px) rotate(45deg); }
+        }
+
+        header {
+            padding: 2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        .hero-text {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #a4b0be;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 20px var(--accent-glow);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px var(--accent-glow);
+        }
+
+        /* Portfolio Gallery */
+        .portfolio {
+            padding: 5rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: transform 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            border-color: rgba(255, 71, 87, 0.3);
+        }
+
+        .pizza-img {
+            width: 100%;
+            height: 250px;
+            background-color: #222;
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Placeholder images using Unsplash */
+        .img-1 { background-image: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .img-2 { background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+        .img-3 { background-image: url('https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'); }
+
+        .item-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-info p {
+            font-size: 0.9rem;
+            color: #a4b0be;
+            font-weight: 300;
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem 5%;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 2rem;
+            color: #747d8c;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+
+    <header>
+        <a href="#" class="logo">Luigi's<span>.</span></a>
+        <nav>
+            <ul>
+                <li><a href="#work">Our Work</a></li>
+                <li><a href="#about">The Chef</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Culinary Art in Every Slice</h1>
+            <p>Welcome to the portfolio of Master Chef Luigi. Discover a world where traditional Italian heritage meets modern gastronomy. We don't just bake pizzas; we craft edible masterpieces.</p>
+            <a href="#work" class="btn">Explore Portfolio</a>
+        </div>
+    </section>
+
+    <section class="portfolio" id="work">
+        <h2 class="section-title">Featured Creations</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <div class="pizza-img img-1"></div>
+                <div class="item-info">
+                    <h3>The Classic Margherita</h3>
+                    <p>San Marzano tomato sauce, fresh mozzarella di bufala, basil, and a drizzle of extra virgin olive oil. A timeless masterpiece.</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <div class="pizza-img img-2"></div>
+                <div class="item-info">
+                    <h3>Rustic Truffle Mushroom</h3>
+                    <p>Wild mushrooms, white truffle cream, fontina cheese, and fresh thyme on our signature sourdough crust.</p>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <div class="pizza-img img-3"></div>
+                <div class="item-info">
+                    <h3>Spicy Diavola</h3>
+                    <p>Spicy Calabrian salami, crushed red peppers, mozzarella, and hot honey glaze for the perfect sweet and spicy balance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2>Ready to collaborate?</h2>
+        <p style="margin: 1rem 0 2rem;">Contact us for exclusive catering and chef partnerships.</p>
+        <a href="mailto:chef@luigis.com" class="btn">chef@luigis.com</a>
+        <p style="margin-top: 3rem; font-size: 0.8rem;">&copy; 2024 Luigi's Culinary Art. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
