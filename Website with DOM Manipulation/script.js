@@ -26,14 +26,14 @@ let isRepeat = false;
 
 // Array of objects storing song data (Requirement 4)
 const songs = [
-    { title: "Summer Breeze", artist: "Chill Beats", src: "songs/song1.mp3", cover: "https://via.placeholder.com/200x200/1e1e1e/1db954?text=Summer+Breeze" },
-    { title: "Midnight Drive", artist: "Synthwave", src: "songs/song2.mp3", cover: "https://via.placeholder.com/200x200/1e1e1e/1db954?text=Midnight+Drive" },
-    { title: "Acoustic Sunset", artist: "John Doe", src: "songs/song3.mp3", cover: "https://via.placeholder.com/200x200/1e1e1e/1db954?text=Acoustic+Sunset" },
-    { title: "Electric Dreams", artist: "Neon Light", src: "songs/song4.mp3", cover: "https://via.placeholder.com/200x200/1e1e1e/1db954?text=Electric+Dreams" },
-    { title: "Lofi Study", artist: "Relaxing Vibes", src: "songs/song5.mp3", cover: "https://via.placeholder.com/200x200/1e1e1e/1db954?text=Lofi+Study" },
-    { title: "Rock Anthem", artist: "The Guitars", src: "songs/song6.mp3", cover: "https://via.placeholder.com/200x200/1e1e1e/1db954?text=Rock+Anthem" },
-    { title: "Piano Melody", artist: "Classical Touch", src: "songs/song7.mp3", cover: "https://via.placeholder.com/200x200/1e1e1e/1db954?text=Piano+Melody" },
-    { title: "Pop Hit 2026", artist: "Star Singer", src: "songs/song8.mp3", cover: "https://via.placeholder.com/200x200/1e1e1e/1db954?text=Pop+Hit" }
+    { title: "Summer Breeze", artist: "Chill Beats", src: "songs/song1.mp3", cover: "https://images.unsplash.com/photo-1459749411175-04bf5292ceea?auto=format&fit=crop&w=400&q=80" },
+    { title: "Midnight Drive", artist: "Synthwave", src: "songs/song2.mp3", cover: "https://images.unsplash.com/photo-1614113489855-66422ad300a4?auto=format&fit=crop&w=400&q=80" },
+    { title: "Acoustic Sunset", artist: "John Doe", src: "songs/song3.mp3", cover: "https://images.unsplash.com/photo-1510915361894-db8b60106cb1?auto=format&fit=crop&w=400&q=80" },
+    { title: "Electric Dreams", artist: "Neon Light", src: "songs/song4.mp3", cover: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=400&q=80" },
+    { title: "Lofi Study", artist: "Relaxing Vibes", src: "songs/song5.mp3", cover: "https://images.unsplash.com/photo-1493225457124-a1a2a5370216?auto=format&fit=crop&w=400&q=80" },
+    { title: "Rock Anthem", artist: "The Guitars", src: "songs/song6.mp3", cover: "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=400&q=80" },
+    { title: "Piano Melody", artist: "Classical Touch", src: "songs/song7.mp3", cover: "https://images.unsplash.com/photo-1552422535-c45813c61732?auto=format&fit=crop&w=400&q=80" },
+    { title: "Pop Hit 2026", artist: "Star Singer", src: "songs/song8.mp3", cover: "https://images.unsplash.com/photo-1516280440502-d2f1f0a2fbdd?auto=format&fit=crop&w=400&q=80" }
 ];
 
 // Initialize the application
@@ -57,8 +57,11 @@ function generatePlaylist() {
 
         // Use innerHTML to structure the item
         li.innerHTML = `
-            <div class="title">${song.title}</div>
-            <div class="artist">${song.artist}</div>
+            <div class="playlist-icon"><i class="fas fa-music"></i></div>
+            <div class="song-details">
+                <div class="title">${song.title}</div>
+                <div class="artist">${song.artist}</div>
+            </div>
         `;
 
         // Requirement 6: Click to play
