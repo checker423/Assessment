@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Music Player - BCA Project</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Player Section -->
+        <div class="player-container">
+            <h2 class="app-title">Simple Music Player</h2>
+            
+            <div class="album-art">
+                <!-- Using a placeholder image for demonstration -->
+                <img id="cover-image" src="https://via.placeholder.com/200x200/333/1db954?text=Album+Art" alt="Album Cover">
+            </div>
+
+            <div class="song-info">
+                <h3 id="song-title">Song Title</h3>
+                <p id="artist-name">Artist Name</p>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <span id="current-time">0:00</span>
+                <input type="range" id="progress-bar" value="0" min="0" max="100">
+                <span id="total-duration">0:00</span>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="shuffle-btn" class="control-btn" title="Shuffle"><i class="fas fa-random"></i></button>
+                <button id="prev-btn" class="control-btn"><i class="fas fa-backward"></i></button>
+                <button id="play-btn" class="control-btn play-pause"><i class="fas fa-play"></i></button>
+                <button id="next-btn" class="control-btn"><i class="fas fa-forward"></i></button>
+                <button id="repeat-btn" class="control-btn" title="Repeat"><i class="fas fa-redo"></i></button>
+            </div>
+
+            <!-- Volume Control -->
+            <div class="volume-container">
+                <i class="fas fa-volume-up"></i>
+                <input type="range" id="volume-slider" value="100" min="0" max="100">
+            </div>
+            
+            <!-- Hidden Audio Element -->
+            <audio id="audio-player"></audio>
+        </div>
+
+        <!-- Playlist Section -->
+        <div class="playlist-container">
+            <div class="playlist-header">
+                <h3>My Playlist</h3>
+                <input type="text" id="search-box" placeholder="Search songs...">
+            </div>
+            <ul id="playlist-list">
+                <!-- Playlist will be generated here by JavaScript -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
