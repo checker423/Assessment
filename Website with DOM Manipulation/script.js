@@ -105,7 +105,7 @@ function generatePlaylist() {
         li.dataset.index = index;
 
         li.innerHTML = `
-            <div class="playlist-icon"><i class="fas fa-music"></i></div>
+            <img src="${song.cover}" class="playlist-thumb" alt="Cover">
             <div class="song-details">
                 <div class="title">${song.title}</div>
                 <div class="artist">${song.artist}</div>

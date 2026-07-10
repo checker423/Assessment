@@ -250,11 +250,12 @@ body {
     transform: translateX(5px);
 }
 
-.playlist-icon {
-    color: #b3b3b3;
-    font-size: 18px;
-    width: 24px;
-    text-align: center;
+.playlist-thumb {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .song-details {
@@ -278,8 +279,8 @@ body {
     border-left: 4px solid #1db954;
 }
 
-.playing .playlist-icon {
-    color: #1db954;
+.playing .playlist-thumb {
+    border: 2px solid #1db954;
 }
 
 .playing .title {
