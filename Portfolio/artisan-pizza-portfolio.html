@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luigi's Pizza Artistry | Culinary Portfolio</title>
+    <title>Crust & Canvas | Artisan Pizza Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -201,6 +201,79 @@
             font-weight: 300;
         }
 
+        /* About The Chef */
+        .about-chef {
+            padding: 5rem 5%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            background: linear-gradient(to right, rgba(255,255,255,0.02), transparent);
+        }
+
+        .chef-img {
+            flex: 1;
+            height: 400px;
+            background-image: url('https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px;
+            box-shadow: 20px 20px 0 var(--accent);
+        }
+
+        .chef-text {
+            flex: 1;
+        }
+
+        .chef-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .chef-text p {
+            font-size: 1.1rem;
+            color: #a4b0be;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 3rem auto 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
         footer {
             text-align: center;
             padding: 3rem 5%;
@@ -218,7 +291,7 @@
     </div>
 
     <header>
-        <a href="#" class="logo">Luigi's<span>.</span></a>
+        <a href="#" class="logo">Crust & Canvas<span>.</span></a>
         <nav>
             <ul>
                 <li><a href="#work">Our Work</a></li>
@@ -231,7 +304,7 @@
     <section class="hero">
         <div class="hero-text">
             <h1>Culinary Art in Every Slice</h1>
-            <p>Welcome to the portfolio of Master Chef Luigi. Discover a world where traditional Italian heritage meets modern gastronomy. We don't just bake pizzas; we craft edible masterpieces.</p>
+            <p>Welcome to the portfolio of Master Pizzaiolo. Discover a world where traditional Italian heritage meets modern gastronomy. We don't just bake pizzas; we craft edible masterpieces.</p>
             <a href="#work" class="btn">Explore Portfolio</a>
         </div>
     </section>
@@ -265,11 +338,29 @@
         </div>
     </section>
 
-    <footer id="contact">
-        <h2>Ready to collaborate?</h2>
-        <p style="margin: 1rem 0 2rem;">Contact us for exclusive catering and chef partnerships.</p>
-        <a href="mailto:chef@luigis.com" class="btn">chef@luigis.com</a>
-        <p style="margin-top: 3rem; font-size: 0.8rem;">&copy; 2024 Luigi's Culinary Art. All rights reserved.</p>
+    <section class="about-chef" id="about">
+        <div class="chef-img"></div>
+        <div class="chef-text">
+            <h2>The Master Pizzaiolo</h2>
+            <p>With over 15 years of experience in the heart of Naples, Vansh has mastered the art of traditional pizza making. His philosophy is simple: respect the ingredients, understand the dough, and bake with passion.</p>
+            <p>Every pizza at Crust & Canvas is a reflection of his dedication to culinary excellence, blending age-old techniques with modern flavor profiles to create an unforgettable dining experience.</p>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">Let's Collaborate</h2>
+        <p style="color: #a4b0be; font-size: 1.1rem;">Interested in exclusive catering, chef partnerships, or just want to say hello?</p>
+        
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea placeholder="Your Message..." required></textarea>
+            <button type="submit" class="btn" style="border: none; cursor: pointer;">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Crust & Canvas Culinary Art. All rights reserved.</p>
     </footer>
 
 </body>
