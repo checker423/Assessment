@@ -3,69 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Music Player - BCA Project</title>
+    <title>Premium Music Player</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <div class="container">
-        <!-- Player Section -->
-        <div class="player-container">
-            <h2 class="app-title">Simple Music Player</h2>
-            
-            <div class="album-art">
-                <!-- Using a placeholder image for demonstration -->
-                <img id="cover-image" src="https://via.placeholder.com/200x200/333/1db954?text=Album+Art" alt="Album Cover">
-            </div>
+<body class="dark-mode">
 
-            <div class="song-info">
-                <h3 id="song-title">Song Title</h3>
-                <p id="artist-name">Artist Name</p>
+    <div class="app-container">
+        
+        <!-- Header / Nav -->
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-compact-disc fa-spin"></i>
+                <h2>Vibes</h2>
             </div>
+            <button id="theme-toggle" class="glass-btn">
+                <i class="fas fa-sun"></i>
+            </button>
+        </header>
 
-            <!-- Progress Bar -->
-            <div class="progress-container">
-                <span id="current-time">0:00</span>
-                <input type="range" id="progress-bar" value="0" min="0" max="100">
-                <span id="total-duration">0:00</span>
-            </div>
+        <div class="main-content">
+            <!-- ===================== -->
+            <!-- LEFT PANEL: Player    -->
+            <!-- ===================== -->
+            <section class="left-panel glass-card">
+                
+                <div class="album-art-container">
+                    <img src="images/shiv2.png" id="cover-image" class="album-art" alt="Album Cover">
+                    <div class="glow-ring"></div>
+                </div>
 
-            <!-- Controls -->
-            <div class="controls">
-                <button id="shuffle-btn" class="control-btn" title="Shuffle"><i class="fas fa-random"></i></button>
-                <button id="prev-btn" class="control-btn"><i class="fas fa-backward"></i></button>
-                <button id="play-btn" class="control-btn play-pause"><i class="fas fa-play"></i></button>
-                <button id="next-btn" class="control-btn"><i class="fas fa-forward"></i></button>
-                <button id="repeat-btn" class="control-btn" title="Repeat"><i class="fas fa-redo"></i></button>
-            </div>
+                <div class="song-info">
+                    <h1 id="song-title">Raja Ki Rajdulari</h1>
+                    <p id="artist-name">Shri Bansi Jogi</p>
+                </div>
 
-            <!-- Volume Control -->
-            <div class="volume-container">
-                <i class="fas fa-volume-up"></i>
-                <input type="range" id="volume-slider" value="100" min="0" max="100">
-            </div>
-            
-            <!-- Hidden Audio Element -->
-            <audio id="audio-player"></audio>
-        </div>
+                <!-- Animated Audio Visualizer (Placeholder for aesthetics) -->
+                <div class="main-visualizer" id="main-visualizer">
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                    <div class="v-bar"></div>
+                </div>
 
-        <!-- Playlist Section -->
-        <div class="playlist-container">
-            <div class="playlist-switcher">
-                <button class="playlist-tab active" data-playlist="shiv">Shiv</button>
-                <button class="playlist-tab" data-playlist="masoom">Masoom Sharma</button>
-                <button class="playlist-tab" data-playlist="dhanda">Dhanda Nyoliwala</button>
-            </div>
-            <div class="playlist-header">
-                <h3>My Playlist</h3>
-                <input type="text" id="search-box" placeholder="Search songs...">
-            </div>
-            <ul id="playlist-list">
-                <!-- Playlist will be generated here by JavaScript -->
-            </ul>
+                <div class="progress-container">
+                    <div class="time-display">
+                        <span id="current-time">0:00</span>
+                        <span id="total-duration">0:00</span>
+                    </div>
+                    <input type="range" id="progress-bar" class="custom-slider" value="0" min="0" max="100">
+                </div>
+
+                <div class="player-controls">
+                    <button id="shuffle-btn" class="control-btn small-btn" title="Shuffle (S)"><i class="fas fa-random"></i></button>
+                    <button id="prev-btn" class="control-btn" title="Previous (Left Arrow)"><i class="fas fa-step-backward"></i></button>
+                    <button id="play-btn" class="control-btn play-pause-btn" title="Play/Pause (Space)"><i class="fas fa-play"></i></button>
+                    <button id="next-btn" class="control-btn" title="Next (Right Arrow)"><i class="fas fa-step-forward"></i></button>
+                    <button id="repeat-btn" class="control-btn small-btn" title="Repeat (R)"><i class="fas fa-redo"></i></button>
+                </div>
+
+                <div class="volume-container">
+                    <i class="fas fa-volume-down volume-icon" id="mute-btn"></i>
+                    <input type="range" id="volume-slider" class="custom-slider" value="100" min="0" max="100">
+                </div>
+                
+                <audio id="audio-player"></audio>
+            </section>
+
+            <!-- ===================== -->
+            <!-- RIGHT PANEL: Playlist -->
+            <!-- ===================== -->
+            <section class="right-panel">
+                
+                <div class="search-container glass-card">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="search-box" placeholder="Search for songs, artists...">
+                </div>
+
+                <div class="playlist-section glass-card">
+                    <!-- Top Tabs -->
+                    <div class="playlist-tabs">
+                        <button class="tab-btn active" data-target="shiv">Shiv</button>
+                        <button class="tab-btn" data-target="masoom">Masoom Sharma</button>
+                        <button class="tab-btn" data-target="dhanda">Dhanda</button>
+                        <button class="tab-btn" data-target="favorites">Favorites <i class="fas fa-heart"></i></button>
+                    </div>
+
+                    <div class="playlist-header-labels">
+                        <span class="label-title">Title</span>
+                        <span class="label-artist">Artist</span>
+                        <span class="label-duration"><i class="far fa-clock"></i></span>
+                    </div>
+
+                    <!-- Playlist Container -->
+                    <ul id="playlist-list" class="playlist-list">
+                        <!-- Items injected by JS -->
+                    </ul>
+                </div>
+
+            </section>
         </div>
     </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container"></div>
 
     <script src="script.js"></script>
 </body>
