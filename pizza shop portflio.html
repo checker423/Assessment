@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luigi's Pizzeria - Premium Pizza Delivery</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: #d32f2f;
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #d32f2f 0%, #f57c00 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #d32f2f;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .about-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            color: #d32f2f;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Order Form Section */
+        .order-section {
+            padding: 4rem 0;
+        }
+
+        .order-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #d32f2f;
+            text-align: center;
+        }
+
+        .form-container {
+            background-color: #f9f9f9;
+            padding: 2.5rem;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d32f2f;
+            box-shadow: 0 0 5px rgba(211, 47, 47, 0.2);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 0.5rem;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+        }
+
+        .submit-button {
+            width: 100%;
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.9rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .submit-button:hover {
+            background-color: #b71c1c;
+            transform: translateY(-2px);
+        }
+
+        .submit-button:active {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+
+        .contact-info {
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">🍕 Luigi's Pizzeria</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#order">Order Now</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>Authentic Italian Pizza Delivered Fresh</h1>
+        <p>Award-winning recipes, premium ingredients, handcrafted pizzas made to perfection</p>
+        <a href="#order" class="cta-button">Order Your Pizza</a>
+    </div>
+</section>
+
+<div class="container">
+    <section class="about-section" id="about">
+        <h2>About Luigi's Pizzeria</h2>
+        <p>
+            Welcome to Luigi's Pizzeria, your premier destination for authentic Italian pizza. 
+            Since 1995, we've been committed to delivering the finest pizza experience with 
+            traditional recipes and the freshest ingredients sourced from trusted suppliers.
+        </p>
+        <p>
+            Our expert pizzaiolos craft each pizza with passion and precision, ensuring every 
+            bite delivers an unforgettable taste of Italy. Whether you're craving a classic 
+            Margherita or a gourmet specialty pizza, we have something for everyone.
+        </p>
+    </section>
+
+    <section class="order-section" id="order">
+        <h2>Place Your Order</h2>
+        <div class="form-container">
+            <form>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="text" id="email" placeholder="your.email@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" placeholder="+1 (555) 123-4567" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Pizza Toppings</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox"> Cheese</label>
+                        <label><input type="checkbox"> Mushroom</label>
+                        <label><input type="checkbox"> Onion</label>
+                        <label><input type="checkbox"> Pepperoni</label>
+                        <label><input type="checkbox"> Bell Peppers</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sauce">Pizza Sauce</label>
+                    <select id="sauce" required>
+                        <option value="">-- Select a sauce --</option>
+                        <option>Tomato</option>
+                        <option>Pesto</option>
+                        <option>Barbecue</option>
+                        <option>White Sauce</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Extra Toppings</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox"> Extra Cheese</label>
+                        <label><input type="checkbox"> Black Olives</label>
+                        <label><input type="checkbox"> Garlic Bread</label>
+                        <label><input type="checkbox"> Fresh Basil</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="instructions">Special Instructions</label>
+                    <textarea id="instructions" placeholder="Any special requests or dietary preferences?"></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">Place Order</button>
+            </form>
+        </div>
+    </section>
+</div>
+
+<footer id="contact">
+    <h3>Luigi's Pizzeria</h3>
+    <div class="contact-info">
+        <p>📞 (555) 123-4567</p>
+        <p>📧 hello@luigispizzeria.com</p>
+        <p>📍 123 Pizza Street, Culinary City, CC 12345</p>
+    </div>
+    <p>&copy; 2024 Luigi's Pizzeria. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
